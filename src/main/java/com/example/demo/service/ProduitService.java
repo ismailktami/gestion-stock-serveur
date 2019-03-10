@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Produit;
@@ -17,7 +19,7 @@ public class ProduitService implements IProduitService{
 	public List<Produit> getProduits() {
 		return produitRepository.findAll();
 	}
-
+	
 	@Override
 	public void addProduit(Produit p) {
 		 produitRepository.save(p);
@@ -32,6 +34,18 @@ public class ProduitService implements IProduitService{
 		produitRepository.delete(produitRepository.getOne(id));
 	}
 
+	@Override
+	public Page<Produit> chercherProduits(PageRequest page) {
+		return produitRepository.chercherProduits( page);
+	}
+
+
+	@Override
+	public Page<Produit> chercherByMc(String mc,PageRequest page) {
+		return produitRepository.chercherByMc(mc, page);
+	}
+
+	
 	
 
 }

@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Produit;
@@ -27,6 +30,26 @@ private IProduitService produitService;
 public List<Produit> produits(){
 	return produitService.getProduits();
 }
+
+
+@GetMapping(value="/chercherProduits")
+public Page<Produit>  finProduits(
+	@RequestParam(name="page",defaultValue="0")int page,@RequestParam(name="size",defaultValue="5")int size
+		) {
+	return produitService.chercherProduits(new PageRequest(page, size));
+	
+}
+
+@GetMapping(value="/chercherByMc")
+public Page<Produit>  
+chercherProduits(@RequestParam(name="mc",defaultValue="")String mc,@RequestParam(name="page",defaultValue="0")int page,@RequestParam(name="size",defaultValue="5")int size
+		) {
+	return produitService.chercherByMc("%"+mc+"%",new PageRequest(page, size));
+	
+}
+
+
+
 
 @PostMapping
 public void addProduit(@RequestBody Produit p) {
