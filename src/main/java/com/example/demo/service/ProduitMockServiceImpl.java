@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Produit;
@@ -45,6 +47,24 @@ public class ProduitMockServiceImpl implements IProduitService {
 	}
 
 */
-	public void deleteProduit(Long  id) {}	
+	public void deleteProduit(Long  id) {}
+
+	@Override
+	public Page<Produit> chercherProduits(PageRequest page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Produit> chercherByMc(String mc, PageRequest page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] getImage(Long ref) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 	
 }

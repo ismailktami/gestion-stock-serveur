@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -13,11 +17,13 @@ public class GestionSotckServeurApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx=	SpringApplication.run(GestionSotckServeurApplication.class, args);
 		ProduitRespository prorep=ctx.getBean(ProduitRespository.class);
-		prorep.save(new Produit("Ref1",120,56));
-		prorep.save(new Produit("Ref2",142,56));
-		prorep.save(new Produit("Ref3",44,56));
-		prorep.save(new Produit("Ref4",12440,56));
-
-	}
-
+		Produit p=new Produit("iss",4444,4444);
+		try {
+			p.setImageProduit("C:\\Users\\ktami\\OneDrive\\FromYourPhone\\IMG_20190121_133129_803.jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		prorep.save(p);
+}
 }

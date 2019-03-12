@@ -1,10 +1,15 @@
 package com.example.demo.entity;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 @Entity
 public class Produit {
 	@Id
@@ -16,6 +21,9 @@ public class Produit {
 	private int quantite;
 	
 	private float prixUnitaire;
+	
+	 @Lob
+	    private byte[] image;
 
 	public Produit() {
 		super();
@@ -28,7 +36,22 @@ public class Produit {
 		this.quantite = quantite;
 		this.prixUnitaire = prixUnitaire;
 	}
+	public Produit(String ref, int quantite, float prixUnitaire,byte[] image) {
+		super();
+		this.ref = ref;
+		this.quantite = quantite;
+		this.prixUnitaire = prixUnitaire;
+		this.image=image;
+	}
 
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
+	
 	public String getRef() {
 		return ref;
 	}
@@ -86,5 +109,31 @@ public class Produit {
 		return true;
 	}
 	
-	
+	 public  void setImageProduit(String photoFilePath) throws IOException {
+	        byte[] photoBytes = readBytesFromFile(photoFilePath);
+	        this.setImage(photoBytes);
+	    }
+	 
+	 private  byte[] readBytesFromFile(String filePath) throws IOException {
+	        File inputFile = new File(filePath);
+	        FileInputStream inputStream = new FileInputStream(inputFile);
+	        byte[] fileBytes = new byte[(int) inputFile.length()];
+	        inputStream.read(fileBytes);
+	        inputStream.close();
+	        return fileBytes;
+	    }
+	  public  void readPhotoOfPerson(String photoFilePath) throws IOException {
+	        byte[] photoBytes = this.getImage();
+	        saveBytesToFile(photoFilePath, photoBytes);
+	    }
+	  
+	  public  void saveBytesToFile(String filePath, byte[] fileBytes) throws IOException {
+	        FileOutputStream outputStream = new FileOutputStream(filePath);
+	        outputStream.write(fileBytes);
+	        outputStream.close();
+	    }
+	     
+	 
+	 
+
 }
