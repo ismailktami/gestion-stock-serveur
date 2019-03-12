@@ -45,6 +45,11 @@ public class ProduitService implements IProduitService{
 		return produitRepository.chercherByMc(mc, page);
 	}
 
+	@Override
+	public byte[] getImage(Long ref) {
+		return produitRepository.getImagByRef(ref);
+	}
+	
 	
 	
 

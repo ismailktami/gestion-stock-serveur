@@ -59,6 +59,12 @@ public class ProduitMockServiceImpl implements IProduitService {
 	public Page<Produit> chercherByMc(String mc, PageRequest page) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public byte[] getImage(Long ref) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }

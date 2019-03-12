@@ -13,6 +13,6 @@ void updateProduit(Produit p);
 public void deleteProduit(Long  id);
 public Page<Produit> chercherProduits(PageRequest page);
 public Page<Produit> chercherByMc(String mc,PageRequest page);
-
+public byte[] getImage(Long ref);
 
 }
