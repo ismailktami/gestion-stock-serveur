@@ -18,4 +18,8 @@ public interface ProduitRespository extends JpaRepository<Produit, Long> {
 	
 	@Query("select p.image from Produit p where p.id=:x")
 	public  byte[] getImagByRef(@Param("x") Long mc);
+	
+	@Query("select  p.image from Produit p")
+	public  Page<Produit> getProduitsImages(Pageable pePageable);
+	
 }

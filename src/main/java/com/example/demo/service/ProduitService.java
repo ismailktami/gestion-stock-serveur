@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Produit;
@@ -21,8 +22,12 @@ public class ProduitService implements IProduitService{
 	}
 	
 	@Override
-	public void addProduit(Produit p) {
-		 produitRepository.save(p);
+	public Boolean addProduit(Produit p) {
+		Produit produit= produitRepository.save(p);
+		if(produit==null)
+			return false;
+		else 
+			return true;
 		}
 
 	@Override
@@ -51,6 +56,10 @@ public class ProduitService implements IProduitService{
 	}
 	
 	
+	public  Page<Produit> getProduitsImages(Pageable pePageable){
+		
+		return produitRepository.getProduitsImages(pePageable);
+	}
 	
 
 }
